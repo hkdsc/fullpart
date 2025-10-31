@@ -20,10 +20,11 @@ The code and dataset will be released before Nov 7th.
 
 ## 📖 Citation
 ```bibtex
-@article{ding2025fullpart,
-  title={FullPart: Generating each 3D Part at Full Resolution},
-  author={Lihe Ding, Shaocong Dong, Yaokun Li, Chenjian Gao, Xiao Chen, Rui Han, Yihao Kuang, Hong Zhang, Bo Huang, Zhanpeng Huang, Zibin Wang, Dan Xu, Tianfan Xue},
-  booktitle={arxiv},
-  year={2025}
+@misc{ding2025fullpart,
+      title={FullPart: Generating each 3D Part at Full Resolution}, 
+      author={Lihe Ding and Shaocong Dong and Yaokun Li and Chenjian Gao and Xiao Chen and Rui Han and Yihao Kuang and Hong Zhang and Bo Huang and Zhanpeng Huang and Zibin Wang and Dan Xu and Tianfan Xue},
+      year={2025},
+      eprint={2510.26140},
+      archivePrefix={arXiv},
 }
 ```
