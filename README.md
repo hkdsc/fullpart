@@ -1,15 +1,19 @@
 <div align="center">
 
 # FullPart: Generating each 3D Part at Full Resolution
-## [arXiv Preprint](https://arxiv.org) | [Project](https://fullpart.github.io) | [Dataset (Nov 7th)](https://huggingface.co/datasets/dscdyc/partverse/tree/main) 
+## [arXiv Preprint](https://arxiv.org/abs/2510.26140) | [Project](https://fullpart3d.github.io) | [Dataset (Nov 7th)](https://huggingface.co/datasets/dscdyc/partverse/tree/main) 
 
 </div>
 
 ![image_1](assets/teaser.png)
 
-We present a new part-based 3D generation framework *FullPart* that combines both implicit and explicit paradigms. And we introduce the largest and most comprehensively annotated 3D part dataset *PartVerse-XL*, an upgraded version of [*PartVerse*](https://copart3d.github.io/), from 12K/91K to 40K/320K objects/parts. 
+We present a new part-based 3D generation framework *FullPart* that combines both implicit and explicit paradigms. 
 
-![image_2](assets/data_teaser.png)
+<!-- ![image_2](assets/framework5.png) -->
+
+And we introduce the largest and most comprehensively annotated 3D part dataset *PartVerse-XL*, an upgraded version of [*PartVerse*](https://copart3d.github.io/), from 12K/91K to 40K/320K objects/parts. 
+
+![image_3](assets/data_teaser.png)
 
 The code and dataset will be released before Nov 7th.
 
