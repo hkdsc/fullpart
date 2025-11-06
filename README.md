@@ -13,7 +13,9 @@ We present a new part-based 3D generation framework *FullPart* that combines bot
 
 And we introduce the largest and most comprehensively annotated 3D part dataset [*PartVerse-XL*](https://huggingface.co/datasets/dscdyc/partversexl), an upgraded version of [*PartVerse*](https://copart3d.github.io/), from 12K/91K to 40K/320K objects/parts. 
 
+
 ![image_3](assets/data_teaser.png)
+This repository is currently under development. Thank you for your patience.
 
 
 ## 🔨 Installation
