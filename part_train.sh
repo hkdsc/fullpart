@@ -1,0 +1,1 @@
+python main.py 3dmaster_part --experiment-name debug_aaa
