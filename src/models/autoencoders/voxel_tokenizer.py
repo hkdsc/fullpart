@@ -334,7 +334,9 @@ class VoxelTokenizer(ModelMixin):
         Initialize the image conditioning model.
         """
         import os
-        os.environ["TORCH_HUB_DIR"] = os.path.expanduser(self.torch_hub_dir)
+        self.torch_hub_dir = os.path.expanduser(self.torch_hub_dir)
+        os.environ["TORCH_HOME"] = os.path.dirname(self.torch_hub_dir)
+        os.environ["TORCH_HUB_DIR"] = self.torch_hub_dir
         repo_dir = f"{self.torch_hub_dir}/facebookresearch_dinov2_main"
 
         dinov2_model = torch.hub.load(

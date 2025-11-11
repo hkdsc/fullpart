@@ -55,6 +55,8 @@ class TrainerConfig(ExperimentConfig):
     _target: Type = field(default_factory=lambda: Trainer)
     """target class to instantiate"""
 
+    local_rank: int = field(default=-1, metadata={"help": "Local rank for distributed training"})
+    
     seed: Optional[int] = 0
     """Random seed."""
 
@@ -598,15 +600,15 @@ class Trainer:
 
         if self.config.valloss_at_begin:
             self.validate_loss(global_step)
-            if self.config.use_ema:
-                with ema_context(self.ema_model, self.optimizer):
-                    self.validate_loss(global_step, "ema")
+            # if self.config.use_ema:
+            #     with ema_context(self.ema_model, self.optimizer):
+            #         self.validate_loss(global_step, "ema")
 
         if self.config.valmetrics_at_begin:
             self.validate_metrics(global_step)
-            if self.config.use_ema:
-                with ema_context(self.ema_model, self.optimizer):
-                    self.validate_metrics(global_step, "ema")
+            # if self.config.use_ema:
+            #     with ema_context(self.ema_model, self.optimizer):
+            #         self.validate_metrics(global_step, "ema")
 
         for epoch in range(first_epoch, self.config.num_epochs):
             train_dataloader = self.train_dataloader
@@ -755,9 +757,9 @@ class Trainer:
                         ):
                             with measure_time("Validation", self.config.measure_time, timer=self.timer, verbose=self.config.verbose):
                                 self.validate(global_step)
-                                if self.config.use_ema:
-                                    with ema_context(self.ema_model, self.optimizer):
-                                        self.validate(global_step, "ema")
+                                # if self.config.use_ema:
+                                #     with ema_context(self.ema_model, self.optimizer):
+                                #         self.validate(global_step, "ema")
                             if self.config.measure_time and self.state.is_main_process:
                                 self.logger_tb.summary_writer.add_scalar(f"Time/Validation", self.timer.timers["Validation"][-1], global_step)
                             if self.config.step_per_val is None and num_trained_data >= milestone_val:
@@ -766,9 +768,9 @@ class Trainer:
                         if self.config.step_per_valloss is not None and global_step % self.config.step_per_valloss == 0:
                             with measure_time("ValLoss", self.config.measure_time, timer=self.timer, verbose=self.config.verbose):
                                 self.validate_loss(global_step)
-                                if self.config.use_ema:
-                                    with ema_context(self.ema_model, self.optimizer):
-                                        self.validate_loss(global_step, name="ema")
+                                # if self.config.use_ema:
+                                #     with ema_context(self.ema_model, self.optimizer):
+                                #         self.validate_loss(global_step, name="ema")
                             if self.config.measure_time and self.state.is_main_process:
                                 self.logger_tb.summary_writer.add_scalar(f"Time/ValLoss", self.timer.timers["ValLoss"][-1], global_step)
 

@@ -12,7 +12,7 @@ pyvista==0.44.2
 pymeshfix==0.17.0
 igraph==0.11.8
 datasets==4.3.0
-deepspeed
+deepspeed==0.16.1
 ipdb
 modelcards
 omegaconf
@@ -37,6 +37,6 @@ pynvml
 lpips
 unitest
 scikit-video
-tryo
+tyro==0.7.3
 jaxtyping
 open-clip-torch

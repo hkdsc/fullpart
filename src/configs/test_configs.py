@@ -14,6 +14,7 @@ class TestConfig(PrintableConfig):
 
     train_configs = train_configs
 
+    local_rank: int = field(default=-1, metadata={"help": "Local rank for distributed training"})
     train_name: Updatable[str] = NO_UPDATE
     yml_path: Updatable[str] = NO_UPDATE
 

@@ -318,7 +318,7 @@ class JointDiTSingle3DPipelineStage2(T2VPixArtAlphaPipeline, PipelineMixin):
         u_2 = (1 - eps_2) * z_2 - slat
 
         # process conditions
-        condition_order_list = self.pipeline_config.condition_order.split(",")
+        # condition_order_list = self.pipeline_config.condition_order.split(",")
 
         #NOTE: add noise for voxel latents
         # z_t_2 = z_t_2.to(voxel_latents.dtype)
@@ -708,11 +708,10 @@ class JointDiTSingle3DPipelineStage2(T2VPixArtAlphaPipeline, PipelineMixin):
                 voxel_latents = voxel_latents - dts[i] * v_pred_2
 
                 # call the callback, if provided
-                if i == len(timesteps) - 1 or ((i + 1) % 1):
-                    progress_bar.update()
-                    if callback is not None and i % callback_steps == 0:
-                        step_idx = i
-                        callback(step_idx, t, latents)
+                progress_bar.update()
+                if callback is not None and i % callback_steps == 0:
+                    step_idx = i
+                    callback(step_idx, t, latents)
 
         if self.transformer.slat_norm:
             slat_normalization = {

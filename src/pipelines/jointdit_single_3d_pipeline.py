@@ -155,7 +155,6 @@ class JointDiTSingle3DPipeline(T2VPixArtAlphaPipeline, PipelineMixin):
         assert self.transformer.drop_img_conds > 0.
         import random
         if random.random() < self.transformer.drop_img_conds:
-            print("===drop===")
             img_conds = torch.zeros_like(img_conds)
 
         # encode part voxel
@@ -220,7 +219,7 @@ class JointDiTSingle3DPipeline(T2VPixArtAlphaPipeline, PipelineMixin):
         loss_orginal_voxel = loss_voxel.mean()  # MSE loss
 
         total_loss =  loss_reweight_voxel
-        print('===loss total, loss 3d==', total_loss.item(), loss_orginal_voxel.item())
+        # print('===loss total, loss 3d==', total_loss.item(), loss_orginal_voxel.item())
         return {"total_loss": total_loss, "loss_unweight_voxel": loss_orginal_voxel}
 
     @staticmethod
@@ -444,11 +443,10 @@ class JointDiTSingle3DPipeline(T2VPixArtAlphaPipeline, PipelineMixin):
                 voxel_latents = voxel_latents - dts[i] * v_pred_2
 
                 # call the callback, if provided
-                if i == len(timesteps) - 1 or ((i + 1) % 1):
-                    progress_bar.update()
-                    if callback is not None and i % callback_steps == 0:
-                        step_idx = i
-                        callback(step_idx, t, latents)
+                progress_bar.update()
+                if callback is not None and i % callback_steps == 0:
+                    step_idx = i
+                    callback(step_idx, t, latents)
 
         # decode voxel
         print("========eval decoded voxel=====", voxel_latents.shape) # 1,8,1,16,16,16

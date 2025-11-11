@@ -505,7 +505,8 @@ class Data:
         self.dataset = Dataset.from_pandas(self.dataset_mirror)
         self.dataset.set_transform(self.process_items)
         if config.num_samples and config.num_samples > 0:
-            self.dataset = self.dataset.select(range(config.num_samples))
+            self.dataset = self.dataset.select(
+                random.choices(list(range(len(self.dataset))), k=min(config.num_samples, len(self.dataset))))
 
         # for dataloader
         if config.use_determinstic_dataset:
@@ -596,9 +597,9 @@ class Data:
                 if os.path.exists(info_path):
                     with open(info_path) as f:
                         infos = json.load(f)
-                    ordered_part_level = infos['ordered_part_level']
+                    ordered_face_label = infos['ordered_face_label']
                     # bboxes = infos['bboxes']
-                    num_parts = len(ordered_part_level)
+                    num_parts = len(ordered_face_label)
                 else:
                     file_list = os.listdir(os.path.join(self.part_dir, part_id))
                     file_list = [x for x in file_list if x.split('.')[-1] == 'glb']
@@ -702,7 +703,8 @@ class Data:
                         cond_img_dir = os.path.join(self.part_cond_dir, part_id)
                 else:
                     cond_img_dir = os.path.join(self.part_cond_dir, part_id)
-                fix_id=100 if self.config.eval else None
+                fix_id = None
+                # fix_id=100 if self.config.eval else None
                 cond_imgs = get_cond_imgs(cond_img_dir, total_num=self.cond_img_num, fix_id=fix_id)
                 cond_imgs = self.image_cond_model_transform(cond_imgs).to(samples_part[0][0].dtype).to(samples_part[0][0].device)
                 samples_cond_imgs.append(cond_imgs)

@@ -43,14 +43,6 @@ def set_environments():
     warnings.filterwarnings("ignore")
     warnings.filterwarnings("ignore", category=FutureWarning, module="diffusers")
 
-    # Avoid dataset pending
-    os.environ["http_proxy"] = "http://oversea-squid1.jp.txyun:11080"
-    os.environ["https_proxy"] = "http://oversea-squid1.jp.txyun:11080"
-    os.environ["no_proxy"] = "localhost,127.0.0.1,localaddress,localdomain.com,internal,corp.kuaishou.com,test.gifshow.com,staging.kuaishou.com"
-    os.environ["TORCH_HOME"] = "/group/ckpt/torchhub"
-    os.environ["HF_DATASETS_CACHE"] = "/video/cache/huggingface"
-    os.environ["HF_DATASETS_OFFLINE"] = "1"
-
 
 class Timer:
     def __init__(self):
