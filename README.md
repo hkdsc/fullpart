@@ -63,24 +63,28 @@ This repository is currently under development. Thank you for your patience.
       ```
 
 ## 🔀 Pretrained Models
-The pretrained models will be uploaded [here](https://drive.google.com/drive/folders/1iSgDC-vnN4JlzLyEHzJ1vsd8jUlTQ9rN?usp=sharing) before Nov 12th.
+The pretrained models will be uploaded [here](https://drive.google.com/drive/folders/1iSgDC-vnN4JlzLyEHzJ1vsd8jUlTQ9rN?usp=sharing) before Nov 26th.
 
 ## 📦 Data
 1. Download the [PartVerse](https://huggingface.co/datasets/dscdyc/partverse)/[PartVerse-XL](https://huggingface.co/datasets/dscdyc/partversexl) (12K/40K objects with 91K/320K parts) from HuggingFace. We have uploaded the initial dataset and are actively working on adding more.
 The data directory after decompressing the dataset should be as follows:
       ```
       dataset/
-      ├── textured_part_glbs/  
       ├── normalized_glbs/    
       ├── anno_infos/    
+      ├── textured_part_glbs/ # Will be available before Nov 19th
       ├── text_captions.json  
       ├── train.csv
       ├── val.csv
       └── metadata.csv
       ```
-      - `textureld_part_glbs` contains textured 3D meshes for each decomposed part of the objects. Each file is stored in the GLB format.
       - `normalized_glbs` provides the complete, normalized 3D mesh of each object in GLB format. These are aligned with the part-level meshes and can be used for holistic shape analysis or comparison.
-      - `anno_infos` provides files that can be used for generating auxiliary information of parts.
+      - `anno_infos` provides part annotation information for each object.
+      
+            *_segmented.glb - full object without texture. 
+            *_face2label.json - annotated part IDs for each face of the full objects. 
+            *_info.json - auxiliary information for each part.
+      - `textured_part_glbs` contains textured 3D meshes for each decomposed part of the objects. Each file is stored in the GLB format. (Will be available before Nov 19th.)
       - `text_captions.json` stores descriptive text captions for each part, automatically generated using a Vision-Language Model (VLM).
       - `train.csv` instance_id for train.
       - `val.csv` instance_id for eval.
