@@ -506,7 +506,7 @@ class Data:
         self.dataset.set_transform(self.process_items)
         if config.num_samples and config.num_samples > 0:
             self.dataset = self.dataset.select(
-                random.choices(list(range(len(self.dataset))), k=min(config.num_samples, len(self.dataset))))
+                random.sample(list(range(len(self.dataset))), k=min(config.num_samples, len(self.dataset))))
 
         # for dataloader
         if config.use_determinstic_dataset:

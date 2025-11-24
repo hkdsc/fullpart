@@ -121,7 +121,7 @@ if __name__ == '__main__':
     parser.add_argument('--start_idx', type=int, default=0, help='start index (inclusive)')
     parser.add_argument('--end_idx', type=int, default=None, help='end index (exclusive)')
     parser.add_argument('--mode', choices=['part', 'full'], default='part', help="mode: 'part' for part renders, 'full' for full mesh renders")
-    parser.add_argument('--data_root', type=str, default='/nvme/lihe/workspace/samesh/debug/pseudo_test_set', help='root output directory')
+    parser.add_argument('--data_root', type=str, default='dataset/partversexl', help='root output directory')
     parser.add_argument('--ins_file', type=str, default=None, help='optional instances file (one per line)')
     parser.add_argument('--feat_model', type=str, default='dinov2_vitl14_reg', help='DINOv2 feature model name')
     parser.add_argument('--batch_size', type=int, default=16, help='batch size for view processing')
