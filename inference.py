@@ -3,8 +3,7 @@
     python inference.py \
         --stage1.transformer-ckpt /path/to/stage1/checkpoint/transformer/pytorch_model.ckpt \
         --stage2.transformer-ckpt /path/to/stage2/checkpoint/transformer/pytorch_model.ckpt \
-        --raw-image /path/to/sample.png \
-        --raw-box /path/to/sample_box.npy \
+        --raw-path /path/to/sample \
         --raw-sample-id custom_id \
         --output-dir ./outputs
 
@@ -87,6 +86,7 @@ class Args:
     raw_image: Optional[Path] = None
     raw_box: Optional[Path] = None
     raw_sample_id: Optional[str] = None
+    raw_path: Optional[Path] = None
     output_dir: Path = Path("./outputs")
     stage1_subdir: str = "stage1"
     stage2_subdir: str = "stage2"
@@ -265,7 +265,11 @@ def _build_canonical_parts(num_parts: int) -> List[torch.Tensor]:
     return [torch.zeros((1, 3), dtype=torch.float32) for _ in range(num_parts)]
 
 
-def _prepare_raw_batch(image_path: Path, box_path: Path, sample_id: Optional[str]) -> Dict[str, List[torch.Tensor]]:
+def _prepare_raw_batch(image_path: Path, box_path: Path, sample_id: Optional[str], raw_path: Optional[Path]) -> Dict[str, List[torch.Tensor]]:
+    if raw_path is not None:
+        raw_path = str(raw_path)
+        image_path = Path(raw_path+".png") if image_path is None else image_path
+        box_path = Path(raw_path+".npy") if box_path is None else box_path
     cond_img = _load_cond_image(image_path)
     box_tensor = _load_box_tensor(box_path)
     num_parts = box_tensor.shape[0]
@@ -365,9 +369,9 @@ def main(args: Args) -> None:
             batch = _fetch_sample(data_module, raw_index)
             batch = _to_device_dtype(batch, device, 'bf16')
             all_batches.append(batch)
-    if args.raw_image is not None and args.raw_box is not None:
+    if args.raw_path is not None or (args.raw_image is not None and args.raw_box is not None):
         all_batches.append(_to_device_dtype(
-            _prepare_raw_batch(args.raw_image, args.raw_box, args.raw_sample_id), device, 'bf16'))
+            _prepare_raw_batch(args.raw_image, args.raw_box, args.raw_sample_id, args.raw_path), device, 'bf16'))
 
     if not all_batches:
         raise ValueError("No dataset indices or raw samples provided for inference.")

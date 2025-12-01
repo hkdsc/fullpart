@@ -63,7 +63,7 @@ This repository is currently under development. Thank you for your patience.
       ```
 
 ## 🔀 Pretrained Models
-The pretrained models will be uploaded [here](https://drive.google.com/drive/folders/1iSgDC-vnN4JlzLyEHzJ1vsd8jUlTQ9rN?usp=sharing) before Nov 30th.
+The pretrained models can be uploaded [here](https://drive.google.com/drive/folders/1iSgDC-vnN4JlzLyEHzJ1vsd8jUlTQ9rN?usp=sharing).
 
 ## 📦 Data
 1. Download the [PartVerse](https://huggingface.co/datasets/dscdyc/partverse)/[PartVerse-XL](https://huggingface.co/datasets/dscdyc/partversexl) (12K/40K objects with 91K/320K parts) from HuggingFace. We have uploaded the initial dataset and are actively working on adding more.
@@ -179,8 +179,7 @@ Run the following command:
 python inference.py \
 	--stage1.transformer-ckpt pretrained_models/{S1_CKPT_PATH} \
 	--stage2.transformer-ckpt pretrained_models/{S2_CKPT_PATH} \
-	--raw-image {MY_IMAGE_PATH} \
-	--raw-box {MY_BOXES_PATH} \
+	--raw-path assets/demo_examples/toy_gun \
 	--raw-sample_id {MY_SAMPLE_ID} \
 	--output-dir {OUT_PATH}
 ```
